@@ -27,12 +27,16 @@ Item {
 	    var status='';
             if (data['exit code'] > 0) {
                 status = data.stderr; 
-                logo.source='';
+                logo.source='error-logo.svg';
             } else {
-                status = data.stdout;
+	        status = data.stdout;  	      
                 while (endsWith(status,'\n'))
                     status=status.substr(0,status.length-1);
-                if (endsWith(status,"Discrete video card is likely on.") || endsWith(status, 'applications using bumblebeed.')) {
+		
+		if (status.toLowerCase().indexOf('error')>0) {
+                  logo.source='error-logo.svg';
+		}
+		else if (endsWith(status,"Discrete video card is likely on.") || endsWith(status,"card is on.") || endsWith(status, 'applications using bumblebeed.')) {
                     logo.source='logo.svg';
                 }
                 else
