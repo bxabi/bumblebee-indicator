@@ -4,7 +4,8 @@ import QtQuick.Controls 1.4
 
 Item {
     id: fullRepr
-    
+    property bool onlyIfOn: plasmoid.configuration.onlyIfOn
+
     width: 600
 
     PlasmaCore.DataSource {
@@ -14,7 +15,7 @@ Item {
 
         onNewData: {
             cardData.text=data.stdout;
-            fullRepr.width=cardData.paintedWidth;
+            //fullRepr.width=cardData.paintedWidth;
         }
     }
 
@@ -37,9 +38,14 @@ Item {
     }
 
     onVisibleChanged: {
-        cardData.text='Loading ...';
         if (visible) {
-            dataSource.connectedSources=['optirun nvidia-smi -q']
+            if (root.cardIsOn || !onlyIfOn) {
+                cardData.text='Loading ...';
+                dataSource.connectedSources=['optirun nvidia-smi -q']
+            }
+            else {
+                cardData.text='Your settings allow showing the info\nonly if the card is on.';
+            }
         }
         else {
             dataSource.connectedSources=[];

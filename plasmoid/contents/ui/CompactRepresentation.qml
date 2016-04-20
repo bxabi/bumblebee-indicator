@@ -4,7 +4,6 @@ import QtQuick.Controls 1.4
 
 Item {
     property int checkInterval: plasmoid.configuration.checkInterval
-    
     property bool cardIsOn: false
     
     Image {
@@ -44,22 +43,26 @@ Item {
                 status = data.stderr;
                 logo.source='error-logo.svg';
                 cardIsOn=false;
+                plasmoid.status = PlasmaCore.Types.PassiveStatus
             } else {
                 status = data.stdout;
                 while (endsWith(status,'\n'))
                     status=status.substr(0,status.length-1);
 
                 if (status.toLowerCase().indexOf('error')>0) {
-                    logoSource='error-logo.svg';
+                    logo.source='error-logo.svg';
                     cardIsOn=false;
+                    plasmoid.status = PlasmaCore.Types.PassiveStatus
                 }
                 else if (endsWith(status,"Discrete video card is likely on.") || endsWith(status,"card is on.") || endsWith(status, 'applications using bumblebeed.')) {
                     logo.source='logo.svg';
                     cardIsOn=true;
+                    plasmoid.status = PlasmaCore.Types.ActiveStatus
                 }
                 else {
                     logo.source='grayscale-logo.svg';
                     cardIsOn=false;
+                    plasmoid.status = PlasmaCore.Types.PassiveStatus
                 }
             }
             tooltip.subText=status;
@@ -117,6 +120,7 @@ Item {
     }
 
     onCardIsOnChanged:  {
+        root.cardIsOn=cardIsOn;
         if (cardIsOn) {
             resultSource.connectedSources=['optirun nvidia-smi --query --display=TEMPERATURE | grep Current'];
         }

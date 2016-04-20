@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=Bumblebee Indicator for Plasma5
 Comment=Plasma 5 plasmoid to show when the nvidia card is on
-Icon=ui/logo.svg
+Icon=YES
 Type=Service
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=bxabi

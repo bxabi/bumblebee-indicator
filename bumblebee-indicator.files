@@ -1,9 +1,7 @@
-build/CMakeFiles/3.3.2/CompilerIdC/CMakeCCompilerId.c
-build/CMakeFiles/3.3.2/CompilerIdCXX/CMakeCXXCompilerId.cpp
-build/CMakeFiles/feature_tests.c
-build/CMakeFiles/feature_tests.cxx
 plasmoid/contents/config/config.qml
+plasmoid/contents/config/main.xml
 plasmoid/contents/ui/config/ConfigGeneral.qml
 plasmoid/contents/ui/CompactRepresentation.qml
 plasmoid/contents/ui/FullRepresentation.qml
 plasmoid/contents/ui/main.qml
+plasmoid/metadata.desktop
