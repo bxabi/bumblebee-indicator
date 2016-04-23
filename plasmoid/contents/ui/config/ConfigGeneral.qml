@@ -5,14 +5,15 @@ import QtQuick.Layouts 1.1
 Item {
     property alias cfg_checkInterval: checkInterval.value
     property alias cfg_onlyIfOn: onlyIfOn.checked
-    
+
     GridLayout {
         columns: 2
         anchors.left: parent.left
         anchors.right: parent.right
-        
+
         Label {
             text: i18n('Check interval in seconds:')
+            Layout.fillWidth: true
             Layout.alignment: Qt.AlignRight
         }
         SpinBox {
@@ -22,8 +23,10 @@ Item {
         }
 
         Label {
-            text: i18n('Show the info page only if the card is already on\n(use this if you have a bumblebee driver bug when the card is not turned back off once started):')
+            text: i18n('Show the info page only if the card is already on (use this if you have a bumblebee driver bug when the card is not turned back off once started):')
             Layout.alignment: Qt.AlignRight
+            wrapMode: Text.WordWrap
+            Layout.fillWidth: true
         }
         CheckBox {
             id: onlyIfOn
