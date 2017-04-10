@@ -43,7 +43,7 @@ Item {
                 status = data.stderr;
                 logo.source='error-logo.svg';
                 cardIsOn=false;
-                plasmoid.status = PlasmaCore.Types.PassiveStatus
+                plasmoid.status = PlasmaCore.Types.ActiveStatus
             } else {
                 status = data.stdout;
                 while (endsWith(status,'\n'))
@@ -52,7 +52,7 @@ Item {
                 if (status.toLowerCase().indexOf('error')>0) {
                     logo.source='error-logo.svg';
                     cardIsOn=false;
-                    plasmoid.status = PlasmaCore.Types.PassiveStatus
+                    plasmoid.status = PlasmaCore.Types.ActiveStatus
                 }
                 else if (endsWith(status,"Discrete video card is likely on.") || endsWith(status,"card is on.") || endsWith(status, 'applications using bumblebeed.')) {
                     logo.source='logo.svg';
