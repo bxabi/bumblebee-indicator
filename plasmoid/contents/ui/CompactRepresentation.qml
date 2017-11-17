@@ -122,7 +122,9 @@ Item {
     onCardIsOnChanged:  {
         root.cardIsOn=cardIsOn;
         if (cardIsOn) {
-            resultSource.connectedSources=['optirun nvidia-smi --query --display=TEMPERATURE | grep "GPU Current Temp"'];
+            var url=Qt.resolvedUrl(".");
+            var exec=url.substring(7,url.length);
+            resultSource.connectedSources=['bash -c "'+exec+'locate-nvidia-smi.sh --query --display=TEMPERATURE | grep \\"GPU Current Temp\\""'];
         }
         else {
             resultSource.connectedSources=[];

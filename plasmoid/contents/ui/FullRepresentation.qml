@@ -41,7 +41,9 @@ Item {
         if (visible) {
             if (root.cardIsOn || !onlyIfOn) {
                 cardData.text='Loading ...';
-                dataSource.connectedSources=['optirun nvidia-smi -q']
+                var url=Qt.resolvedUrl(".");
+                var exec=url.substring(7,url.length);
+                dataSource.connectedSources=['bash -c "'+exec+'locate-nvidia-smi.sh -q"']
             }
             else {
                 cardData.text='Your settings allow showing the info\nonly if the card is on.';
