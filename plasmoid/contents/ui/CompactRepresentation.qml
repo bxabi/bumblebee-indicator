@@ -5,14 +5,14 @@ import QtQuick.Controls 1.4
 Item {
     property int checkInterval: plasmoid.configuration.checkInterval
     property bool cardIsOn: false
-    
+
     Image {
         id: logo
         source: "grayscale-logo.svg"
         sourceSize.width: parent.width
         sourceSize.height: parent.height
     }
-    
+
     PlasmaCore.ToolTipArea {
         id: tooltip
         width: parent.width
@@ -29,14 +29,14 @@ Item {
             }
         }
     }
-    
+
     //status checking
     PlasmaCore.DataSource {
         id: statusSource
         engine: 'executable'
-        
+
         connectedSources: ['optirun --status']
-        
+
         onNewData: {
             var status='';
             if (data['exit code'] > 0) {
@@ -69,16 +69,16 @@ Item {
         }
         interval: checkInterval * 1000
     }
-    
+
     function endsWith(string, substr) {
         return string.length >= substr.length && string.substr(string.length - substr.length) == substr;
     }
-    
+
     onCheckIntervalChanged: {
         statusSource.interval=checkInterval * 1000;
         resultSource.interval=checkInterval * 1000;
     }
-    
+
     //temperature checking
 
     Text {
@@ -94,9 +94,9 @@ Item {
     PlasmaCore.DataSource {
         id: resultSource
         engine: 'executable'
-        
+
         connectedSources: []
-        
+
         onNewData: {
             var tmp='';
             if (data['exit code'] > 0) {
@@ -122,7 +122,7 @@ Item {
     onCardIsOnChanged:  {
         root.cardIsOn=cardIsOn;
         if (cardIsOn) {
-            resultSource.connectedSources=['optirun nvidia-smi --query --display=TEMPERATURE | grep Current'];
+            resultSource.connectedSources=['optirun nvidia-smi --query --display=TEMPERATURE | grep "GPU Current Temp"'];
         }
         else {
             resultSource.connectedSources=[];
