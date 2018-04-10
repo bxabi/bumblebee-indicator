@@ -1,12 +1,12 @@
 #!/bin/bash
 which nvidia-smi >/dev/null 2>&1
 if [ $? -eq 0 ] ; then
-    optirun nvidia-smi $@
+    nvidia-smi $@
 else 
    version=`modinfo nvidia | grep ^version: |grep -o "[0-9]*\.[0-9]*"`
    tryUsrLib=/usr/lib/nvidia-$version/bin/nvidia-smi
    if [ -f $tryUsrLib ] ; then
-      optirun $tryUsrLib $@
+      $tryUsrLib $@
    else   
       echo "/usr/bin/nvidia-smi not found"
       echo "$tryUsrLib not found"
