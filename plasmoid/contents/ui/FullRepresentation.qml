@@ -36,21 +36,28 @@ Item {
                 dataSource: dataSource
         }
     }
-
-    onVisibleChanged: {
-        if (visible) {
-            if (root.cardIsOn || !onlyIfOn) {
-                cardData.text='Loading ...';
-                var url=Qt.resolvedUrl(".");
-                var exec=url.substring(7,url.length);
-                dataSource.connectedSources=['bash -c "'+exec+'locate-nvidia-smi.sh -q"']
+    
+    Connections {
+        target: plasmoid
+        onExpandedChanged: {
+            if (plasmoid.expanded) {
+                if (root.cardIsOn || !onlyIfOn) {
+                    var withOptirun="";
+                    if (!root.cardIsOn)                         
+                        withOptirun="optirun ";
+                        
+                    cardData.text='Loading ...';
+                    var url=Qt.resolvedUrl(".");
+                    var exec=url.substring(7,url.length);
+                    dataSource.connectedSources=['bash -c "'+withOptirun+exec+'locate-nvidia-smi.sh -q"']
+                }
+                else {
+                    cardData.text='Your settings allow showing the info\nonly if the card is on.';
+                }
             }
             else {
-                cardData.text='Your settings allow showing the info\nonly if the card is on.';
-            }
-        }
-        else {
-            dataSource.connectedSources=[];
+                dataSource.connectedSources=[];
+            }            
         }
     }
 }

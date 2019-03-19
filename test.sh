@@ -1,4 +1,3 @@
-plasmapkg2 --remove com.bxabi.bumblebee-indicator
-rm -r ~/.local/share/plasma/plasmoids/com.bxabi.bumblebee-indicator
-plasmapkg2 --install plasmoid
-plasmawindowed com.bxabi.bumblebee-indicator
+#kpackagetool5 -t Plasma/Applet --install plasmoid
+kpackagetool5 -t Plasma/Applet --upgrade plasmoid
+plasmoidviewer --applet com.bxabi.bumblebee-indicator

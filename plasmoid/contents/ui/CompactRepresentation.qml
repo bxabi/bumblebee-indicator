@@ -83,7 +83,7 @@ Item {
 
     Text {
         id: tempText
-        text:''
+        text: ''
         color: 'white'
         //font.bold: true
         anchors.fill: parent

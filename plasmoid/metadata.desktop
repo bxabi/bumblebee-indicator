@@ -2,14 +2,14 @@
 Encoding=UTF-8
 Name=Bumblebee Indicator for Plasma5
 Comment=Plasma 5 plasmoid to show when the nvidia card is on
-Icon=ui/logo.svg
+Icon=video-card-inactive
 Type=Service
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=bxabi
 X-KDE-PluginInfo-Email=csabi@bxabi.com
 X-KDE-PluginInfo-License=GPL3
 X-KDE-PluginInfo-Name=com.bxabi.bumblebee-indicator
-X-KDE-PluginInfo-Version=0.6.1
+X-KDE-PluginInfo-Version=0.70
 X-KDE-PluginInfo-Website=https://bxabi.com/dokuwiki/bumblebee-indicator
 X-KDE-ServiceTypes=Plasma/Applet
 X-Plasma-NotificationArea=true
