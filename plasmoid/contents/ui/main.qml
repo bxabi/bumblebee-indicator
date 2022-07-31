@@ -13,4 +13,5 @@ Item {
     Plasmoid.fullRepresentation: fullRepr
 
     property bool cardIsOn: false
+    property bool hideTemp: false
 }

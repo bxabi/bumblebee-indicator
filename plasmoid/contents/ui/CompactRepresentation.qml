@@ -4,6 +4,7 @@ import QtQuick.Controls 1.4
 
 Item {
     property int checkInterval: plasmoid.configuration.checkInterval
+    property bool hideTemp: plasmoid.configuration.hideTemp
     property bool cardIsOn: false
 
     Image {
@@ -119,9 +120,18 @@ Item {
         interval: checkInterval * 1000
     }
 
+    onHideTempChanged:  {
+        root.hideTemp=hideTemp;
+        updateResultSource();
+    }
+
     onCardIsOnChanged:  {
         root.cardIsOn=cardIsOn;
-        if (cardIsOn) {
+        updateResultSource();
+    }
+
+    function updateResultSource() {
+        if (cardIsOn && !hideTemp) {
             var url=Qt.resolvedUrl(".");
             var exec=url.substring(7,url.length);
             resultSource.connectedSources=['bash -c "'+exec+'locate-nvidia-smi.sh --query --display=TEMPERATURE | grep \\"GPU Current Temp\\""'];

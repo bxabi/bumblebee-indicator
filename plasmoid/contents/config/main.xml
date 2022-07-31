@@ -7,11 +7,15 @@
 
     <group name="General">
         <entry name="checkInterval" type="Int">
-	    <label>Check interval in seconds</label>
+            <label>Check interval in seconds</label>
             <default>5</default>
         </entry>
-	<entry name="onlyIfOn" type="Bool">
-	    <label>Show card info only if the card is already on</label>
+        <entry name="onlyIfOn" type="Bool">
+            <label>Show card info only if the card is already on</label>
+            <default>false</default>
+        </entry>
+        <entry name="hideTemp" type="Bool">
+            <label>Hide temperature</label>
             <default>false</default>
         </entry>
     </group>
