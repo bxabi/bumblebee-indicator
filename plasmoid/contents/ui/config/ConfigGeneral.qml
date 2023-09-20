@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.1
 Item {
     property alias cfg_checkInterval: checkInterval.value
     property alias cfg_onlyIfOn: onlyIfOn.checked
+    property alias cfg_hideTemp: hideTemp.checked
 
     GridLayout {
         columns: 2
@@ -30,6 +31,16 @@ Item {
         }
         CheckBox {
             id: onlyIfOn
+            checked: false
+        }
+        Label {
+            text: i18n('Hide temperature (use this if you have a bumblebee driver bug when the card is on or not turning back off after suspend):')
+            Layout.alignment: Qt.AlignRight
+            wrapMode: Text.WordWrap
+            Layout.fillWidth: true
+        }
+        CheckBox {
+            id: hideTemp
             checked: false
         }
     }    
