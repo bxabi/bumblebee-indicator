@@ -1,54 +1,62 @@
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import QtQuick.Controls 1.4
+import QtQuick.Controls
+import org.kde.plasma.plasma5support as Plasma5Support
+import org.kde.kirigami as Kirigami
+import QtQuick.Layouts
 
 Item {
     id: fullRepr
     property bool onlyIfOn: plasmoid.configuration.onlyIfOn
 
-    width: 600
+    property int defaultWidth: 200
 
-    PlasmaCore.DataSource {
+    Layout.preferredWidth: cardData.paintedWidth <= defaultWidth ? defaultWidth : (cardData.paintedWidth + scrollView.ScrollBar.vertical.width + 1);
+
+    Plasma5Support.DataSource {
         id: dataSource
         engine: 'executable'
         connectedSources:[]
 
-        onNewData: {
+        onNewData: (sourceName, data) => {
             cardData.text=data.stdout;
             //fullRepr.width=cardData.paintedWidth;
+
         }
     }
 
     ScrollView {
+        id: scrollView
         anchors.fill: parent
 
         Text {
             id: cardData
             font.family: 'monospace'
-            color: PlasmaCore.ColorScope.textColor;
+            color: Kirigami.Theme.textColor;
         }
     }
 
     ListView {
         id: data
 
-        model: PlasmaCore.DataModel {
-                dataSource: dataSource
+        model: Plasma5Support.DataModel {
+            dataSource: dataSource
         }
     }
-    
+
     Connections {
-        target: plasmoid
-        onExpandedChanged: {
-            if (plasmoid.expanded) {
+        target: root
+        ignoreUnknownSignals: true
+        function onExpandedChanged () {
+            if (root.expanded) {
                 if (root.cardIsOn || !onlyIfOn) {
                     var withOptirun="";
-                    if (!root.cardIsOn)                         
+                    if (!root.cardIsOn)
                         withOptirun="optirun ";
-                        
+
                     cardData.text='Loading ...';
                     var url=Qt.resolvedUrl(".");
-                    var exec=url.substring(7,url.length);
+                    var exec=String(url).substring(7,url.length);
                     dataSource.connectedSources=['bash -c "'+withOptirun+exec+'locate-nvidia-smi.sh -q"']
                 }
                 else {
@@ -57,7 +65,7 @@ Item {
             }
             else {
                 dataSource.connectedSources=[];
-            }            
+            }
         }
     }
 }

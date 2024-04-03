@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import QtQuick.Controls 1.4
+import org.kde.plasma.plasma5support as Plasma5Support
+import QtQuick.Controls
 
 Item {
     property int checkInterval: plasmoid.configuration.checkInterval
@@ -24,21 +25,21 @@ Item {
         id: mouseArea
         anchors.fill: parent
 
-        onClicked: {
+        onClicked: (mouse) => {
             if (mouse.button == Qt.LeftButton) {
-                plasmoid.expanded = !plasmoid.expanded;
+                root.expanded = !root.expanded;
             }
         }
     }
 
     //status checking
-    PlasmaCore.DataSource {
+    Plasma5Support.DataSource {
         id: statusSource
         engine: 'executable'
 
         connectedSources: ['optirun --status']
 
-        onNewData: {
+        onNewData: (sourceName, data) => {
             var status='';
             if (data['exit code'] > 0) {
                 status = data.stderr;
@@ -92,13 +93,13 @@ Item {
         horizontalAlignment: Text.AlignHCenter
     }
 
-    PlasmaCore.DataSource {
+    Plasma5Support.DataSource {
         id: resultSource
         engine: 'executable'
 
         connectedSources: []
 
-        onNewData: {
+        onNewData: (sourceName, data) => {
             var tmp='';
             if (data['exit code'] > 0) {
                 tmp = data.stderr;
@@ -133,7 +134,7 @@ Item {
     function updateResultSource() {
         if (cardIsOn && !hideTemp) {
             var url=Qt.resolvedUrl(".");
-            var exec=url.substring(7,url.length);
+            var exec=String(url).substring(7,url.length);
             resultSource.connectedSources=['bash -c "'+exec+'locate-nvidia-smi.sh --query --display=TEMPERATURE | grep \\"GPU Current Temp\\""'];
         }
         else {
