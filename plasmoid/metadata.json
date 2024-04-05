@@ -1,0 +1,21 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "csabi@bxabi.com",
+                "Name": "bxabi"
+            }
+        ],
+        "Category": "System Information",
+        "Name": "Bumblebee Indicator for Plasma 6",
+        "Description": "Plasma 6 plasmoid to show when the nvidia card is on",
+        "Icon": "video-card-inactive",
+        "Id": "com.bxabi.bumblebee-indicator",
+        "Version": "0.70",
+        "License": "GPL3",
+        "Website": "https://bxabi.com/dokuwiki/bumblebee-indicator"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-NotificationAreaCategory": "Hardware",
+    "KPackageStructure": "Plasma/Applet"
+}

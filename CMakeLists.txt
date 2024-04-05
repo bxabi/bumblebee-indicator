@@ -9,7 +9,7 @@ find_package(ECM REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_MODULE_PATH})
  
 # Locate plasma_install_package macro.
-find_package(KF5Plasma REQUIRED)
+find_package(Plasma REQUIRED)
  
 # Add installatation target ("make install").
-plasma_install_package(plasmoid bumblebee-kde5-plasmoid)
+plasma_install_package(plasmoid com.bxabi.bumblebee-indicator)
